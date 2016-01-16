@@ -1,4 +1,4 @@
-def main():
+def main(message, args):
         members = client.get_all_members()
         users = []
         toMessage = "Mentioning all members in " + args[1] + " : "
