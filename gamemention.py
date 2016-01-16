@@ -1,15 +1,14 @@
 import discord
 
 detils = open("login.txt", "r")
-login = detils.read().split(",")
+logins = detils.read().split(",")
 detils.close()
 
-client= dischord.Client()
-client.login(detils[0], detils[1])
+client= discord.Client()
+client.login(logins[0], logins[1])
 
-def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
+if not client.is_logged_in:
+    print("Failed to login")
+    exit(1)
 
+print("Starting...")
