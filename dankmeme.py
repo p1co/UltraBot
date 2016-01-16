@@ -12,6 +12,8 @@ memes = [
 	"http://cdn.smosh.com/sites/default/files/ftpuploads/bloguploads/0913/harry-potter-memes-potter-lookin-fine.jpg",
 	"http://s.quickmeme.com/img/c9/c9c9573e46b3fb7bd6003c62958f4e9bbe9b305801c1e14dff0ab955172c0f74.jpg",
 	"https://bacontoday.com/wp-content/uploads/2013/06/vpq.jpg",
+	"http://i.imgur.com/aTDVeFX.jpg",
+	"http://i.imgur.com/SwIsGcW.jpg",
 ]
 
 def main(message, args, client):

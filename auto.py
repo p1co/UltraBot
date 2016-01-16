@@ -34,3 +34,5 @@ def main(t, client):
             return True
         elif "yolo" in str.lower():
             client.send_message(t.channel, "No. Just no.")
+        elif "sp00ky" in str.lower():
+            client.send_message(t.channel, "https://www.youtube.com/watch?v=q6-ZGAGcJrk")
