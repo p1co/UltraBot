@@ -11,14 +11,12 @@ def listContains(listMain, test):
 
 class newCommands:
     def mention(message, args):
-        if message.content.startswith('!mention'):
-            members = client.get_all_members()
-            toSend = []
-            users = []
-            toMessage = ""
-            for member in members:
-                if listContains(member.roles, args[1].lower()):
-                    toMessage = toMessage + " " + member.mention()
+        members = client.get_all_members()
+        users = []
+        toMessage = ""
+        for member in members:
+            if listContains(member.roles, args[1].lower()):
+                toMessage = toMessage + " " + member.mention()
         client.send_message(message.channel, toMessage)
 
     def hello(t, t1):
@@ -30,13 +28,14 @@ commands_main = newCommands()
 
 @client.event
 def on_message(message):
-    messCont = message.content[1:]
-    commTbl = messCont.split(" ")
-    try:
-        toCall = getattr(newCommands, commTbl[0])
-        toCall(message, commTbl)
-    except AttributeError:
-        print("fuck")
+    if message.content.startswith("!"):
+        messCont = message.content[1:]
+        commTbl = messCont.split(" ")
+        try:
+            toCall = getattr(newCommands, commTbl[0])
+            toCall(message, commTbl)
+        except AttributeError:
+            print("Something's gone wrong. It could be that the command didn't exist, or the command errored.")
 
 @client.event
 def on_ready():
