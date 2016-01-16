@@ -1,11 +1,11 @@
 import discord
 
 client = discord.Client()
-client.login("elephantsAndMail@gmail.com", "ALongerPassword")
+client.login("james@hurcomb.net", "ALongerPassword")
 
 def listContains(listMain, test):
     for a in listMain:
-        if a.name == test:
+        if a.name.lower() == test:
             return True
 
 
@@ -13,12 +13,12 @@ class newCommands:
     def mention(message, args):
         members = client.get_all_members()
         users = []
-        toMessage = ""
+        toMessage = "Mentioning all members in GTA: "
         for member in members:
+            print(member.name)
             if listContains(member.roles, args[1].lower()):
                 toMessage = toMessage + " " + member.mention()
         client.send_message(message.channel, toMessage)
-
     def hello(t, t1):
         client.send_message(t.channel, "Hello, world!")
     def lenny(t, t1):
