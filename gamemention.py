@@ -21,6 +21,9 @@ class newCommands:
                     toMessage = toMessage + " " + member.mention()
         client.send_message(message.channel, toMessage)
 
+    def hello(t, t1):
+        client.send_message(t.channel, "Hello, world!")
+
 
 
 commands_main = newCommands()
