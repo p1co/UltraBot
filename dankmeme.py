@@ -19,3 +19,5 @@ def main(message, args, client):
 	maxNum = len(memes) - 1
 	rand = random.randint(0, maxNum)
 	client.send_message(message.channel, memes[rand])
+def help(message, args, client):
+        client.send_message(message.channel,"Inserts a dank meme picked by @Screw Jenny. Not as dank as he thinks. Usage: !dankmeme")
