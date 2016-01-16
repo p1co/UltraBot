@@ -1,49 +1,34 @@
 import discord
+import sys
+import hello
+import lenny
+import help
 
 client = discord.Client()
 client.login("james@hurcomb.net", "ALongerPassword")
+
+def runCommand(commTbl, message):
+    if (commTbl[0] in sys.modules):
+        prog = getattr(sys.modules, commTbl[0])
+        prog.main(message, commTbl)
 
 def listContains(listMain, test):
     for a in listMain:
         if a.name.lower() == test:
             return True
 
-
-class newCommands:
-    def mention(message, args):
-        members = client.get_all_members()
-        users = []
-        toMessage = "Mentioning all members in " + args[1] + " : "
-        for member in members:
-            print(member.name)
-            if listContains(member.roles, args[1].lower()):
-                toMessage = toMessage + " " + member.mention()
-        client.send_message(message.channel, toMessage)
-    def hello(t, t1):
-        client.send_message(t.channel, "Hello, world!")
-    def lenny(t, t1):
-        client.send_message(t.channel, "( ͡° ͜ʖ ͡°)")
-
-
-
-commands_main = newCommands()
+def log(text):
+    print("[LOG] " + text)
 
 @client.event
 def on_message(message):
-    if message.content.startswith("!"):
-        messCont = message.content[1:]
-        commTbl = messCont.split(" ")
-        try:
-            toCall = getattr(newCommands, commTbl[0])
-            toCall(message, commTbl)
-        except AttributeError:
-            print("Something's gone wrong. It could be that the command didn't exist, or the command errored.")
+    comm = message[1:]
+    comms = comm.split(" ")
+    log("Attempting to run command: " + comms[0])
+    runCommand(comms, message)
 
 @client.event
 def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
+    log("Logged in!")
 
 client.run()
