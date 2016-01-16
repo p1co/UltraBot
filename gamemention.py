@@ -21,8 +21,8 @@ def runCommand(commTbl, message):
             prog = sys.modules[commTbl[1]]
             client.send_message(message.channel, "Help for " + commTbl[1] + ":")
             prog.help(message, commTbl, client)
-    else:
-        client.send_message(message.channel, "Sorry, that command doesn't exist! " + message.author.mention())
+        else:
+            client.send_message(message.channel, "Sorry, that command doesn't exist! " + message.author.mention())
 
 def log(text):
     print("[LOG] " + text)
