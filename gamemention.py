@@ -9,8 +9,11 @@ client.login("james@hurcomb.net", "ALongerPassword")
 
 def runCommand(commTbl, message):
     if (commTbl[0] in sys.modules):
-        prog = getattr(sys.modules, commTbl[0])
-        prog.main(message, commTbl)
+        try:
+            prog = getattr(sys.modules, commTbl[0])
+            prog.main(message, commTbl)
+        except AttributeError:
+            log("Fuck")
 
 def listContains(listMain, test):
     for a in listMain:
@@ -22,10 +25,11 @@ def log(text):
 
 @client.event
 def on_message(message):
-    comm = message[1:]
-    comms = comm.split(" ")
-    log("Attempting to run command: " + comms[0])
-    runCommand(comms, message)
+    if message.content.startswith("!"):
+        comm = message[1:]
+        comms = comm.split(" ")
+        log("Attempting to run command: " + comms[0])
+        runCommand(comms, message)
 
 @client.event
 def on_ready():
