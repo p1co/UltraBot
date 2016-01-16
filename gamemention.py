@@ -6,6 +6,7 @@ import lenny
 import mention
 import auto
 import pinn
+import dankmeme
 
 client = discord.Client()
 client.login("james@hurcomb.net", "ALongerPassword")

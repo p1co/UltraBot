@@ -32,3 +32,5 @@ def main(t, client):
             client.send_message(t.channel, "DON'T PICK ON MY FRIENDS")
             client.send_message(t.channel, "You've made a very powerful enemy")
             return True
+        elif "yolo" in str.lower():
+            client.send_message(t.channel, "No. Just no.")
