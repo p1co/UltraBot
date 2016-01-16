@@ -1,4 +1,4 @@
-import dischord
+import discord
 
 detils = open("login.txt", "r")
 login = detils.read().split(",")
