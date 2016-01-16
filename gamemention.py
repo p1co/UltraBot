@@ -5,7 +5,7 @@ import hello
 import lenny
 import mention
 import auto
-import pinn
+#import pinn
 
 client = discord.Client()
 client.login("james@hurcomb.net", "ALongerPassword")
@@ -21,8 +21,7 @@ def runCommand(commTbl, message):
             client.send_message(message.channel, "Help for " + commTbl[1] + ":")
             prog.help(message, commTbl, client)
     else:
-        if not auto.main(message, client):
-            client.send_message(message.channel, "Sorry, that command doesn't exist! " + message.author.mention())
+        client.send_message(message.channel, "Sorry, that command doesn't exist! " + message.author.mention())
 
 def log(text):
     print("[LOG] " + text)
@@ -34,6 +33,8 @@ def on_message(message):
         comms = comm.split(" ")
         log("Attempting to run command: " + comms[0])
         runCommand(comms, message)
+    else:
+        auto.main(message, client)
 
 @client.event
 def on_ready():
