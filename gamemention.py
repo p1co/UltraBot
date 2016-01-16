@@ -5,7 +5,7 @@ import hello
 import lenny
 import mention
 import auto
-#import pinn
+import pinn
 
 client = discord.Client()
 client.login("james@hurcomb.net", "ALongerPassword")
