@@ -1,4 +1,4 @@
-class helllo:
+class hello:
 	def main():
 	
 	def help():
