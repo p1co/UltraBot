@@ -12,3 +12,8 @@ def main(t, client):
         elif "definately" in str.lower() or "definetly" in str.lower():
             client.send_message(t.channel, "You mean DEFINITELY")
             return True
+        elif "u wot" in str.lower() or "fight me" in str.lower() or "fite me" in str.lower():
+            client.send_message(t.channel, "(╯°□°)╯︵ ┻━┻")
+            client.send_message(t.channel, "Don't pick on my friends")
+            client.send_message(t.channel, "You've made a very powerful enemy")
+            return True
