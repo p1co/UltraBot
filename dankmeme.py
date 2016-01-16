@@ -10,12 +10,9 @@ memes = [
 	"http://i1.kym-cdn.com/photos/images/original/001/026/966/a17.png",
 	"https://stephentmorris.files.wordpress.com/2016/01/oldermeme.jpg",
 	"http://s.quickmeme.com/img/c9/c9c9573e46b3fb7bd6003c62958f4e9bbe9b305801c1e14dff0ab955172c0f74.jpg",
-<<<<<<< HEAD
 	"https://bacontoday.com/wp-content/uploads/2013/06/vpq.jpg",
 	"http://i.imgur.com/aTDVeFX.jpg",
 	"http://i.imgur.com/SwIsGcW.jpg",
-=======
->>>>>>> origin/master
 ]
 
 def main(message, args, client):
