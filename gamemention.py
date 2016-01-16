@@ -21,6 +21,8 @@ class newCommands:
 
     def hello(t, t1):
         client.send_message(t.channel, "Hello, world!")
+    def lenny(t, t1):
+        client.send_message(t.channel, "( ͡° ͜ʖ ͡°)")
 
 
 
