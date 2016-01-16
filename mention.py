@@ -8,3 +8,4 @@ def main():
                 toMessage = toMessage + " " + member.mention()
         client.send_message(message.channel, toMessage)
 def help():
+        print("f")
