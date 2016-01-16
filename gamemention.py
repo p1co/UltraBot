@@ -13,7 +13,7 @@ class newCommands:
     def mention(message, args):
         members = client.get_all_members()
         users = []
-        toMessage = "Mentioning all members in GTA: "
+        toMessage = "Mentioning all members in " + args[1] + " : "
         for member in members:
             print(member.name)
             if listContains(member.roles, args[1].lower()):
