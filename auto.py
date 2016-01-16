@@ -6,6 +6,9 @@ def main(t, client):
         elif "would of" in str.lower():
             client.send_message(t.channel, "You mean WOULD HAVE")
             return True
+        elif "doot doot" in str.lower():
+            client.send_message(t.channel, "thank mr skeltal")
+            return True
         elif "could of" in str.lower():
             client.send_message(t.channel, "You mean COULD HAVE")
             return True
