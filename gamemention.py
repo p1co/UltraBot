@@ -4,6 +4,8 @@ import sys
 import hello
 import lenny
 import mention
+import auto
+import pinn
 
 client = discord.Client()
 client.login("james@hurcomb.net", "ALongerPassword")
@@ -19,7 +21,8 @@ def runCommand(commTbl, message):
             client.send_message(message.channel, "Help for " + commTbl[1] + ":")
             prog.help(message, commTbl, client)
     else:
-        client.send_message(message.channel, "Sorry, that command doesn't exist! " + message.author.mention())
+        if not auto.main(message, client):
+            client.send_message(message.channel, "Sorry, that command doesn't exist! " + message.author.mention())
 
 def log(text):
     print("[LOG] " + text)

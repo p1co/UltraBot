@@ -15,3 +15,4 @@ def main(message, args, client):
 
 def help(message, args, client):
 	client.send_message(message.channel, "Mentions all users in a specified group, usage: \"!mention <group name>\"")
+	
