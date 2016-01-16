@@ -1,14 +1,31 @@
 import discord
 
-detils = open("login.txt", "r")
-logins = detils.read().split(",")
-detils.close()
+client = discord.Client()
+client.login("elephantsAndMail@gmail.com", "ALongerPassword")
 
-client= discord.Client()
-client.login(logins[0], logins[1])
+def listContains(listMain, test):
+    for a in listMain:
+        if a.name == test:
+            return True
 
-if not client.is_logged_in:
-    print("Failed to login")
-    exit(1)
+@client.event
+def on_message(message):
+    
+    if message.content.startswith('!GTA'):
+        members = client.get_all_members()
+        toSend = []
+        users = []
+        toMessage = ""
+        for member in members:
+            if listContains(member.roles, "gta"):
+                toMessage = toMessage + " " + member.mention()
+        client.send_message(message.channel, toMessage, mentions=True)
+            
+@client.event
+def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
 
-print("Starting...")
+client.run()
