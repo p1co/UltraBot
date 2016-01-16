@@ -18,6 +18,9 @@ def main(t, client):
         elif " u " in str.lower():
             client.send_message(t.channel, "You mean YOU")
             return True
+        elif "me and" in str.lower() or "me &" in str.lower():
+            client.send_message(t.channel, "You mean AND I")
+            return True
         elif "u wot" in str.lower() or "fight me" in str.lower() or "fite me" in str.lower():
             client.send_message(t.channel, "(╯°□°)╯︵ ┻━┻")
             client.send_message(t.channel, "DON'T PICK ON MY FRIENDS")
