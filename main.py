@@ -18,11 +18,6 @@ details.close()
 client= discord.Client()
 client.login(logins[0], logins[1])
 
-# Checks if logged in, and if so, continues.
-if not client.is_logged_in:
-    print("Failed to login")
-    exit(1)
-
 # Runs command
 def runCommand(commTbl, message):
     if (commTbl[0] in sys.modules):
