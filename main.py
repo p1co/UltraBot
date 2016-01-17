@@ -1,6 +1,13 @@
 import discord
 import sys
+# Locates the modules folder
+# moduleslocation = open("moduleslocation.txt", "r")
+# locate = moduleslocation.read()
+# sys.path.append(locate)
+# moduleslocation.close()
 sys.path.append(r'D:\Documents\GitHub\GameMentionBot\modules')
+# Imports modules
+
 import hello
 import lenny
 import mention
@@ -12,19 +19,22 @@ import eightball
 
 #Pull login details from file
 
-
 detils = open("login.txt", "r")
 logins = detils.read().split(",")
 detils.close()
 
+# Logs in
+
 client= discord.Client()
 client.login(logins[0], logins[1])
+
+# Throws error & exits
 
 if not client.is_logged_in:
     print("Failed to login")
     exit(1)
 
-print("Starting...")
+# Gets command & runs help
 
 def runCommand(commTbl, message):
     if (commTbl[0] in sys.modules):
@@ -41,8 +51,12 @@ def runCommand(commTbl, message):
     else:
             client.send_message(message.channel, "Sorry, that command doesn't exist! " + message.author.mention())
 
+# Logs all performed commands to console
+
 def log(text):
     print("[LOG] " + text)
+
+# Splits commands
 
 @client.event
 def on_message(message):
