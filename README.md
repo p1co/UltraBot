@@ -4,7 +4,7 @@ A bot that patrols the server for any custom commands being called. If such a co
 
 # Installation
 
-- Install the [github python API](https://github.com/Rapptz/discord.py)
+- Install the [Discord python API](https://github.com/Rapptz/discord.py)
 - Enter your bot's Discord credentials into the login.txt in the form (username@example.com, pass)
 - Run main.py
 
