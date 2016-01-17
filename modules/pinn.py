@@ -1,13 +1,14 @@
 #Pinn-generating module for the bot.
 
 import random
-maxNum = 3
 pinnLinks = [
 	"http://i.imgur.com/4uBVAlv.jpg",
 	"http://i.imgur.com/N7ZLdtD.jpg",
 	"http://i.imgur.com/aTDVeFX.jpg",
 	"http://i.imgur.com/SwIsGcW.jpg",
 ]
+
+maxNum = len(pinnLinks) - 1
 
 def main(message, comms, client):
 	if (len(comms) == 1):
