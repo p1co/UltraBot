@@ -35,14 +35,23 @@ def loadAll():
 def runCommand(commTbl, message, moduleList):
     if (commTbl[0] == "debug"):
         prog = sys.modules[commTbl[0]]
-        prog.main(message, commTbl, client, moduleList, sys)
+        try:
+            prog.main(message, commTbl, client, moduleList, sys)
+        except Exception:
+            log("Error occured in " + commTbl[0])
     elif (commTbl[0] in sys.modules):
         log("Found module with name " + commTbl[0])
         prog = sys.modules[commTbl[0]]
-        prog.main(message, commTbl, client)
+        try:
+            prog.main(message, commTbl, client)
+        except Exception:
+            log("Error occured in " + commTbl[0])
     elif (commTbl[0] == "help"):
         if (commTbl[1] in sys.modules):
-            prog = sys.modules[commTbl[1]]
+            try:
+                prog = sys.modules[commTbl[1]]
+            except Exception:
+                log("Error occured in " + commTbl[0])
             client.send_message(message.channel, "Help for " + commTbl[1] + ":")
             prog.help(message, commTbl, client)
         else:
