@@ -54,8 +54,4 @@ def on_message(message):
 def on_ready():
     log("Logged in!")
 
-if not client.is_logged_in
-    log("Error logging in.")
-    log("Perhaps the discord servers are down, or you entered the wrong credentials")
-    exit(1)
 client.run()
