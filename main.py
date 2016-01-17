@@ -68,13 +68,14 @@ client, moduleList = loadAll()
 # Splits parameters.
 @client.event
 def on_message(message):
-    if message.content.startswith("!"):
-        comm = message.content[1:]
-        comms = comm.split(" ")
-        log("Attempting to run command: " + comms[0])
-        runCommand(comms, message, moduleList)
-    else:
-        auto.main(message, client)
+    if message.author.id != client.user.id:
+        if message.content.startswith("!"):
+            comm = message.content[1:]
+            comms = comm.split(" ")
+            log("Attempting to run command: " + comms[0])
+            runCommand(comms, message, moduleList)
+        else:
+            auto.main(message, client)
 
 @client.event
 def on_ready():
