@@ -8,8 +8,21 @@ import auto
 import pinn
 import dankmeme
 
-client = discord.Client()
-client.login("james@hurcomb.net", "ALongerPassword")
+#Pull login details from file
+
+
+detils = open("login.txt", "r")
+logins = detils.read().split(",")
+detils.close()
+
+client= discord.Client()
+client.login(logins[0], logins[1])
+
+if not client.is_logged_in:
+    print("Failed to login")
+    exit(1)
+
+print("Starting...")
 
 def runCommand(commTbl, message):
     if (commTbl[0] in sys.modules):
@@ -41,4 +54,8 @@ def on_message(message):
 def on_ready():
     log("Logged in!")
 
+if not client.is_logged_in
+    log("Error logging in.")
+    log("Perhaps the discord servers are down, or you entered the wrong credentials")
+    exit(1)
 client.run()
