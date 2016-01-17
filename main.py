@@ -8,6 +8,7 @@ import auto
 import pinn
 import dankmeme
 import help
+import eightball
 
 #Pull login details from file
 
