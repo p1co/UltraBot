@@ -9,3 +9,7 @@ A bot that patrols the server for any custom commands being called. If such a co
 - Append the main.py
    sys.path.append(r'D:\Documents\GitHub\GameMentionBot\modules') to wherever your modules folder is
 - Run main.py
+
+# I want to make a module!
+
+Cool! look at a simple one like "hello" or "lenny" to get the basic convention then go ahead. Feel free to make a pull request, I'd add more or less any function here.
