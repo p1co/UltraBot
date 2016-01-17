@@ -1,15 +1,13 @@
 import discord
 import sys
-sys.path.append(r'D:\Documents\GitHub\GameMentionBot\modules')
+import importlib
+sys.path.append("/modules")
+from os import listdir
+from os.path import isfile, join
+moduleList = [f for f in listdir() if isfile(join(mypath, f))]
 
-import hello
-import lenny
-import mention
-import auto
-import pinn
-import dankmeme
-import help
-import eightball
+for mod in moduleList:
+    importlib.import_module(mod)
 
 #Login with details from file
 details = open("login.txt", "r")
