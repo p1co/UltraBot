@@ -30,9 +30,9 @@ def runCommand(commTbl, message):
             client.send_message(message.channel, "Help for " + commTbl[1] + ":")
             prog.help(message, commTbl, client)
         else:
-            client.send_message(message.channel, "Sorry, the command specified does not exist. Help could not be found. " + message.author.mention()) 
+            client.send_message(message.channel, "Help for the command specified could not be found. " + message.author.mention()) 
     else:
-            client.send_message(message.channel, "Sorry, that command doesn't exist! " + message.author.mention())
+            client.send_message(message.channel, "The command specified could not be found. " + message.author.mention())
 
 # Logs text to console.
 def log(text):
