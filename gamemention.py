@@ -7,6 +7,7 @@ import mention
 import auto
 import pinn
 import dankmeme
+import help
 
 #Pull login details from file
 
