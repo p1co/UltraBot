@@ -4,15 +4,24 @@ import importlib
 from os import listdir
 from os.path import isfile, join
 
+def listContains(listMain, test):
+    for a in listMain:
+        if a == test:
+            return True
+    return False
+
 def loadAll():
     sys.path.append("modules")
     onlyfiles = listdir('modules')
+    moduleList = []
+    dontLoad = [".gitignore", "__pycache__"]
     for module in onlyfiles:
-        if module != ".gitignore":
+        if not (listContains(dontLoad, module)):
             modName = module.split(".")
             obj = __import__(modName[0])
             globals()[modName[0]] = obj
             log("Loaded module: " + modName[0])
+            moduleList.insert(0, modName[0])
 
     #Login with details from file
     details = open("login.txt", "r")
@@ -20,12 +29,15 @@ def loadAll():
     details.close()
     client= discord.Client()
     client.login(logins[0], logins[1])
-    return client
+    return client, moduleList
 
 # Runs command
-def runCommand(commTbl, message):
-    if (commTbl[0] in sys.modules):
-        print("hey!")
+def runCommand(commTbl, message, moduleList):
+    if (commTbl[0] == "debug"):
+        prog = sys.modules[commTbl[0]]
+        prog.main(message, commTbl, client, moduleList, sys)
+    elif (commTbl[0] in sys.modules):
+        log("Found module with name " + commTbl[0])
         prog = sys.modules[commTbl[0]]
         prog.main(message, commTbl, client)
     elif (commTbl[0] == "help"):
@@ -34,7 +46,7 @@ def runCommand(commTbl, message):
             client.send_message(message.channel, "Help for " + commTbl[1] + ":")
             prog.help(message, commTbl, client)
         else:
-            client.send_message(message.channel, "Help for the command specified could not be found. " + message.author.mention()) 
+            client.send_message(message.channel, "Help for the command specified could not be found. " + message.author.mention())
     else:
             client.send_message(message.channel, "The command specified could not be found. " + message.author.mention())
 
@@ -42,7 +54,7 @@ def runCommand(commTbl, message):
 def log(text):
     print("[LOG] " + text)
 
-client = loadAll()
+client, moduleList = loadAll()
 
 # Splits parameters.
 @client.event
@@ -51,7 +63,7 @@ def on_message(message):
         comm = message.content[1:]
         comms = comm.split(" ")
         log("Attempting to run command: " + comms[0])
-        runCommand(comms, message)
+        runCommand(comms, message, moduleList)
     else:
         auto.main(message, client)
 

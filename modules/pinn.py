@@ -14,6 +14,7 @@ def main(message, comms, client):
 		ranNum = random.randint(0, maxNum)
 		client.send_message(message.channel, pinnLinks[ranNum])
 	else:
+		print("lengt ht fas a : " + str(len(comms)))
 		if int(comms[1]) <= maxNum + 1:
 			client.send_message(message.channel, pinnLinks[int(comms[1]) - 1])
 	
