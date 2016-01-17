@@ -1,6 +1,6 @@
 import discord
 import sys
-
+sys.path.append(r'D:\Documents\GitHub\GameMentionBot\modules')
 import hello
 import lenny
 import mention
