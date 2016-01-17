@@ -1,20 +1,26 @@
 import discord
 import sys
 import importlib
-sys.path.append("/modules")
 from os import listdir
 from os.path import isfile, join
-moduleList = [f for f in listdir() if isfile(join(mypath, f))]
 
-for mod in moduleList:
-    importlib.import_module(mod)
+def loadAll():
+    sys.path.append("modules")
+    onlyfiles = listdir('modules')
+    for module in onlyfiles:
+        if module != ".gitignore":
+            modName = module.split(".")
+            obj = __import__(modName[0])
+            globals()[modName[0]] = obj
+            log("Loaded module: " + modName[0])
 
-#Login with details from file
-details = open("login.txt", "r")
-logins = details.read().split(",")
-details.close()
-client= discord.Client()
-client.login(logins[0], logins[1])
+    #Login with details from file
+    details = open("login.txt", "r")
+    logins = details.read().split(",")
+    details.close()
+    client= discord.Client()
+    client.login(logins[0], logins[1])
+    return client
 
 # Runs command
 def runCommand(commTbl, message):
@@ -35,6 +41,8 @@ def runCommand(commTbl, message):
 # Logs text to console.
 def log(text):
     print("[LOG] " + text)
+
+client = loadAll()
 
 # Splits parameters.
 @client.event
