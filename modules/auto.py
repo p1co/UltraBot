@@ -1,3 +1,6 @@
+#This module named 'auto' will always be loaded as the auto module, which means that any text that isn't a command will be run through the main function within this module.
+#You can edit this file to include a custom function, meaning that you can do something when someone says a specific phrase.
+
 def main(t, client):
         str = t.content
         if "should of" in str.lower():
