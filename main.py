@@ -37,6 +37,8 @@ def runCommand(commTbl, message):
             client.send_message(message.channel, "Help for " + commTbl[1] + ":")
             prog.help(message, commTbl, client)
         else:
+            client.send_message(message.channel, "That command does not exist, and help does not exist for it! " + message.author.mention())
+    else:
             client.send_message(message.channel, "Sorry, that command doesn't exist! " + message.author.mention())
 
 def log(text):
