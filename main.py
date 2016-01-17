@@ -1,12 +1,6 @@
 import discord
 import sys
-# Locates the modules folder
-# moduleslocation = open("moduleslocation.txt", "r")
-# locate = moduleslocation.read()
-# sys.path.append(locate)
-# moduleslocation.close()
 sys.path.append(r'D:\Documents\GitHub\GameMentionBot\modules')
-# Imports modules
 
 import hello
 import lenny
@@ -17,25 +11,19 @@ import dankmeme
 import help
 import eightball
 
-#Pull login details from file
-
-detils = open("login.txt", "r")
-logins = detils.read().split(",")
-detils.close()
-
-# Logs in
-
+#Login with details from file
+details = open("login.txt", "r")
+logins = details.read().split(",")
+details.close()
 client= discord.Client()
 client.login(logins[0], logins[1])
 
-# Throws error & exits
-
+# Checks if logged in, and if so, continues.
 if not client.is_logged_in:
     print("Failed to login")
     exit(1)
 
-# Gets command & runs help
-
+# Runs command
 def runCommand(commTbl, message):
     if (commTbl[0] in sys.modules):
         print("hey!")
@@ -47,17 +35,15 @@ def runCommand(commTbl, message):
             client.send_message(message.channel, "Help for " + commTbl[1] + ":")
             prog.help(message, commTbl, client)
         else:
-            client.send_message(message.channel, "That command does not exist, and help does not exist for it! " + message.author.mention())
+            client.send_message(message.channel, "The command specified does not exist. " + message.author.mention()) 
     else:
             client.send_message(message.channel, "Sorry, that command doesn't exist! " + message.author.mention())
 
-# Logs all performed commands to console
-
+# Logs text to console.
 def log(text):
     print("[LOG] " + text)
 
-# Splits commands
-
+# Splits parameters.
 @client.event
 def on_message(message):
     if message.content.startswith("!"):
