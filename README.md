@@ -4,4 +4,8 @@ A bot that patrols the server for any custom commands being called. If such a co
 
 # Installation
 
-Make sure you have the Discord python API installed. Create a text document named login.txt and enter your credentials as they are in the example in this repo. Run main.py and see it work.
+- Install the [github python API](https://github.com/Rapptz/discord.py)
+- Enter your credentials into the login.txt in the form (user@domain.tld,pass)
+- Append the main.py
+   sys.path.append(r'D:\Documents\GitHub\GameMentionBot\modules') to wherever your modules folder is
+- Run main.py
