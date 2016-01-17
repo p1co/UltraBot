@@ -15,8 +15,13 @@ memes = [
 ]
 
 def main(message, args, client):
-	maxNum = len(memes) - 1
-	rand = random.randint(0, maxNum)
-	client.send_message(message.channel, memes[rand])
+        if (len(args) == 1):
+                maxNum = len(memes) - 1
+                rand = random.randint(0, maxNum)
+                client.send_message(message.channel, memes[rand])
+        elif args[1] == "nope.avi":
+                client.send_message(message.channel, "http://i.imgur.com/XFu47.gif")
+        else:
+                client.send_message(message.channel, "Meme not found. Probably not dank enough!")
 def help(message, args, client):
         client.send_message(message.channel,"Inserts a dank meme picked by @Screw Jenny. Not as dank as he thinks. Usage: !dankmeme")
