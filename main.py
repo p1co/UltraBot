@@ -1,8 +1,10 @@
 import discord
 import sys
+import time
 import importlib
 from os import listdir
 from os.path import isfile, join
+userClocks = {'guy': time.clock()}
 
 
 def listContains(listMain, test):
@@ -67,12 +69,24 @@ client, moduleList = loadAll()
 
 @client.event
 async def on_message(message):
+    justMade = False
+
     if message.author.id != client.user.id:
         if message.content.startswith("!"):
-            comm = message.content[1:]
-            comms = comm.split(" ")
-            log("Attempting to run command: " + comms[0])
-            await runCommand(comms, message, moduleList)
+            try:
+                clockCur = userClocks[message.author.id]
+            except Exception:
+                userClocks[message.author.id] = time.clock()
+                justMade = True
+            if userClocks[message.author.id] < time.clock() - 1 or justMade == True:
+                justMade = False
+                userClocks[message.author.id] = time.clock()
+                comm = message.content[1:]
+                comms = comm.split(" ")
+                log("Attempting to run command: " + comms[0])
+                await runCommand(comms, message, moduleList)
+            else:
+                log("Stopped spam from " + message.author.name)
         else:
             await auto.main(message, client)
 
