@@ -15,7 +15,7 @@ def main(t, client):
         elif "could of" in str.lower():
             client.send_message(t.channel, "You mean COULD HAVE")
             return True
-        elif "definately" in str.lower() or "definetly" in str.lower():
+        elif "definately" in str.lower() or "definatly" in str.lower() or "definantly" in str.lower() or "definetly" in str.lower() or "definently" in str.lower() or "defiantly" in str.lower():
             client.send_message(t.channel, "You mean DEFINITELY")
             return True
         elif " ur " in str.lower():
