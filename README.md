@@ -18,3 +18,9 @@ async def main(message, args, client):
 async def help(message, args, client):
   await client.send_message(message.channel, "A command that says hello to people.")
 ```
+
+Please note that there are 'special' modules defined by default, which perform special actions and are not used in the standard module way. These are, as of current:
+- auto.py
+- debug.py
+
+If you have any problems with the bot, make an issue or message us.
