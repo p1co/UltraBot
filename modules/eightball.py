@@ -23,9 +23,9 @@ responses = [
         "Very doubtful"
 ]
 
-def main(message, args, client):
+async def main(message, args, client):
 	maxNum = len(responses) - 1
 	rand = random.randint(0, maxNum)
-	client.send_message(message.channel, responses[rand])
-def help(message, args, client):
-        client.send_message(message.channel,"Inserts a repsonse to a question you ask. Usage: !8ball [Question]")
+	await client.send_message(message.channel, responses[rand])
+async def help(message, args, client):
+    await client.send_message(message.channel,"Inserts a repsonse to a question you ask. Usage: !8ball [Question]")

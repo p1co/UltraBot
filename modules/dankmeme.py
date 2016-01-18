@@ -14,14 +14,14 @@ memes = [
 	"http://i.imgur.com/SwIsGcW.jpg",
 ]
 
-def main(message, args, client):
+async def main(message, args, client):
         if (len(args) == 1):
                 maxNum = len(memes) - 1
                 rand = random.randint(0, maxNum)
-                client.send_message(message.channel, memes[rand])
+                await client.send_message(message.channel, memes[rand])
         elif args[1] == "nope.avi":
-                client.send_message(message.channel, "http://i.imgur.com/XFu47.gif")
+                await client.send_message(message.channel, "http://i.imgur.com/XFu47.gif")
         else:
-                client.send_message(message.channel, "Meme not found. Probably not dank enough!")
-def help(message, args, client):
-        client.send_message(message.channel,"Inserts a dank meme picked by @Screw Jenny. Not as dank as he thinks. Usage: !dankmeme")
+                await client.send_message(message.channel, "Meme not found. Probably not dank enough!")
+async def help(message, args, client):
+        await client.send_message(message.channel,"Inserts a dank meme picked by @Screw Jenny. Not as dank as he thinks. Usage: !dankmeme")

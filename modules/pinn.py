@@ -10,13 +10,13 @@ pinnLinks = [
 
 maxNum = len(pinnLinks) - 1
 
-def main(message, comms, client):
+async def main(message, comms, client):
 	if (len(comms) == 1):
 		ranNum = random.randint(0, maxNum)
-		client.send_message(message.channel, pinnLinks[ranNum])
+		await client.send_message(message.channel, pinnLinks[ranNum])
 	else:
 		if int(comms[1]) <= maxNum + 1:
-			client.send_message(message.channel, pinnLinks[int(comms[1]) - 1])
+			await client.send_message(message.channel, pinnLinks[int(comms[1]) - 1])
 	
-def help(message, comms, client):
-	client.send_message(message.channel, "Posts a random picture of you-know-who.")
+async def help(message, comms, client):
+	await client.send_message(message.channel, "Posts a random picture of you-know-who.")
