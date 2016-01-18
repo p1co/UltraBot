@@ -10,13 +10,13 @@ SaltLinks = [
 
 maxNum = len(SaltLinks) - 1
 
-def main(message, comms, client):
+async def main(message, comms, client):
     if (len(comms) == 1):
         ranNum = random.randint(0, maxNum)
-        client.send_message(message.channel, SaltLinks[ranNum])
+        await client.send_message(message.channel, SaltLinks[ranNum])
     else:
         if int(comms[1]) <= maxNum + 1:
-            client.send_message(message.channel, SaltLinks[int(comms[1]) - 1])
+            await client.send_message(message.channel, SaltLinks[int(comms[1]) - 1])
 
-def help(message, comms, client):
-    client.send_message(message.channel, "For use when someone's being a little bitch. Usage: !salt")
+async def help(message, comms, client):
+    await client.send_message(message.channel, "For use when someone's being a little bitch. Usage: !salt")
