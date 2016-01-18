@@ -15,8 +15,13 @@ async def main(t, client):
         elif "could of" in str.lower():
             await client.send_message(t.channel, "You mean COULD HAVE")
             return True
+<<<<<<< HEAD
         elif "definately" in str.lower() or "definetly" in str.lower():
             await client.send_message(t.channel, "You mean DEFINITELY")
+=======
+        elif "definately" in str.lower() or "definatly" in str.lower() or "definantly" in str.lower() or "definetly" in str.lower() or "definently" in str.lower() or "defiantly" in str.lower():
+            client.send_message(t.channel, "You mean DEFINITELY")
+>>>>>>> origin/master
             return True
         elif " ur " in str.lower():
             await client.send_message(t.channel, "You mean YOUR/YOU'RE")
