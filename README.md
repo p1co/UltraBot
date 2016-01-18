@@ -10,4 +10,11 @@ A bot that patrols the server for any custom commands being called. If such a co
 
 # I want to make a module!
 
-Cool! look at a simple one like "hello" or "lenny" to get the basic convention then go ahead. Make a pull request if you think that your custom module is worth of being added. I'll take a look over it, and consider adding it if I think it is worthy.
+Cool! Here's an example module to get you started below:
+```
+# Hello module
+async def main(message, args, client):
+  await client.send_message(message.channel, "Hello, " + message.author.mention)
+async def help(message, args, client):
+  await client.send_message(message.channel, "A command that says hello to people.")
+```
