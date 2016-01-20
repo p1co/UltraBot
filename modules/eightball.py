@@ -21,7 +21,8 @@ responses = [
         "My sources say no",
         "Outlook not so good",
         "Very doubtful"
-]
+] 
+
 
 async def main(message, args, client):
 	maxNum = len(responses) - 1
