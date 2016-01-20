@@ -2,10 +2,10 @@
 
 A bot that responds to custom commands, certain phrases and keywords and possibly more in the future. Some useful functions include:
 
-[Here's the wiki!](https://github.com/elephantLocator/UltraBot/wiki)
-
 - An easily useable way to add custom commands, with 'modules'. If you wish to make such a module, scroll down for an example.
 - A built-in debug function to run custom modules and see where they might be erroring.
+
+[Here's the wiki!](https://github.com/elephantLocator/UltraBot/wiki)
 
 # Installation
 
