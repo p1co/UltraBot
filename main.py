@@ -1,3 +1,6 @@
+# Disclaimer:
+# Main file is awaiting a complete re-coding. DO NOT EDIT (especially James)!
+
 import discord
 import sys
 import time
@@ -5,7 +8,7 @@ import importlib
 from os import listdir
 from os.path import isfile, join
 userClocks = {'guy': time.clock()}
-
+debugData = {}
 
 def listContains(listMain, test):
     for a in listMain:
@@ -18,6 +21,7 @@ def loadAll():
     onlyfiles = listdir('modules')
     moduleList = []
     dontLoad = [".gitignore", "__pycache__"]
+    debugData['spamLogs'] = []
     for module in onlyfiles:
         if not (listContains(dontLoad, module)):
             modName = module.split(".")
@@ -35,7 +39,7 @@ async def runCommand(commTbl, message, moduleList):
     if (commTbl[0] == "debug"):
         prog = sys.modules[commTbl[0]]
         try:
-            await prog.main(message, commTbl, client, moduleList, sys)
+            await prog.main(message, commTbl, client, moduleList, sys, debugData)
         except Exception:
             log("Error occured in " + commTbl[0])
     elif (commTbl[0] in sys.modules):

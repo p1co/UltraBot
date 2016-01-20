@@ -1,6 +1,6 @@
 #Debugging module for the bot.
 
-async def main(message, args, client, modules, sys):
+async def main(message, args, client, modules, sys, debugData):
 	if len(args) > 1:
 		if args[1] == "get":
 			if args[2] == "modules":
@@ -10,7 +10,8 @@ async def main(message, args, client, modules, sys):
 				await client.send_message(message.channel, moduleList)
 
 			elif args[2] == "issues":
-				await client.send_message(message.channel, "No know issues at the moment.")
+				await client.send_message(message.channel, "Known issues:")
+				await client.send_message(message.channel, "- Possible spelling errors")
 
 		elif args[1] == "run":
 			if args[2] != None:
@@ -24,3 +25,5 @@ async def main(message, args, client, modules, sys):
 						await sys.modules[modName].main(message, newArgs, client)
 					except Exception as ex:
 						await client.send_message(message.channel, "That command gave an error: " + str(ex))
+			else:
+				client.send_message(message.channel, "No command was specified to run! " + message.author.mention)
