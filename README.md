@@ -1,6 +1,9 @@
 # UltraBot
 
-A bot that patrols the server for any custom commands being called. If such a command is called, then it will carry out a custom function. Fucntions can include calling all members with a specified role, posting a weird image macro, or just saying hi,
+A bot that responds to custom commands, certain phrases and keywords and possibly more in the future. Some useful functions include:
+
+- An easily useable way to add custom commands, with 'modules'. If you wish to make such a module, scroll down for an example.
+- A built-in debug function to run custom modules and see where they might be erroring.
 
 # Installation
 

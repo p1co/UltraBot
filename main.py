@@ -58,14 +58,10 @@ async def runCommand(commTbl, message, moduleList):
     else:
         await client.send_message(message.channel, "The command specified could not be found. ")
     
-
-# Logs text to console.
 def log(text):
     print("[LOG] " + text)
 
 client, moduleList = loadAll()
-
-# Splits parameters.
 
 @client.event
 async def on_message(message):
