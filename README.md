@@ -4,10 +4,12 @@ A bot that responds to custom commands, certain phrases and keywords and possibl
 
 - An easily useable way to add custom commands, with 'modules'. If you wish to make such a module, scroll down for an example.
 - A built-in debug function to run custom modules and see where they might be erroring.
-
+- Some pre-included modules, see the [wiki](https://github.com/elephantLocator/UltraBot/wiki) for more infomation.
+- 
 # Installation
 
 - Install the [Discord python API](https://github.com/Rapptz/discord.py)
+  - Ensure to install the async branch, to allow all features to work
 - Enter your bot's Discord credentials into the login.txt in the form (username@example.com, pass)
 - Run main.py
 
