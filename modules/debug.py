@@ -12,6 +12,18 @@ async def main(message, args, client, modules, sys, debugData):
 			elif args[2] == "issues":
 				await client.send_message(message.channel, "Known issues:")
 				await client.send_message(message.channel, "- Possible spelling errors")
+				await client.send_message(message.channel, "- Manuadd <add> does not work.")
+
+			elif args[2] == "users":
+				messTo = "Users currently online: "
+				for server in client.servers:
+					for user in server.members:
+						#if user.status == 'online':
+							messTo = messTo + user.name + "; "
+				await client.send_message(message.channel, messTo)
+
+			else:
+				await client.send_message(message.channel, "Command not found within debug module.")
 
 		elif args[1] == "run":
 			if args[2] != None:
@@ -21,6 +33,7 @@ async def main(message, args, client, modules, sys, debugData):
 					newArgs = args
 					newArgs.pop(0)
 					newArgs.pop(0)
+					await client.send_message(message.channel, "Attempting to run command: " + modName)
 					try:
 						await sys.modules[modName].main(message, newArgs, client)
 					except Exception as ex:

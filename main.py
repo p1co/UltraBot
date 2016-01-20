@@ -42,6 +42,14 @@ async def runCommand(commTbl, message, moduleList):
             await prog.main(message, commTbl, client, moduleList, sys, debugData)
         except Exception:
             log("Error occured in " + commTbl[0])
+    elif (commTbl[0] == "help"):
+        try:
+            prog = sys.modules[commTbl[1]]
+            await client.send_message(message.channel, "Help for " + commTbl[1] + ":")
+            await prog.help(message, commTbl, client)
+        except Exception:
+            log("Error occured in " + commTbl[0])
+            await client.send_message(message.channel, "Help for the command specified could not be found. " + message.author.mention)
     elif (commTbl[0] in sys.modules):
         log("Found module with name " + commTbl[0])
         prog = sys.modules[commTbl[0]]
@@ -49,16 +57,6 @@ async def runCommand(commTbl, message, moduleList):
             await prog.main(message, commTbl, client)
         except Exception:
             log("Error occured in " + commTbl[0])
-    elif (commTbl[0] == "help"):
-        if (commTbl[1] in sys.modules):
-            try:
-                prog = sys.modules[commTbl[1]]
-            except Exception:
-                log("Error occured in " + commTbl[0])
-            await client.send_message(message.channel, "Help for " + commTbl[1] + ":")
-            await prog.help(message, commTbl, client)
-        else:
-            await client.send_message(message.channel, "Help for the command specified could not be found. " + message.author.mention())
     else:
         await client.send_message(message.channel, "The command specified could not be found. ")
     
@@ -94,9 +92,6 @@ async def on_message(message):
 @client.event
 async def on_ready():
     log("Logged in!")
-
-
-
 
 details = open("login.txt", "r")
 logins = details.read().split(",")
