@@ -1,99 +1,97 @@
-# Disclaimer:
-# Main file is awaiting a complete re-coding. DO NOT EDIT (especially James)!
-
-import discord
-import sys
-import time
-import importlib
+# Import things that are needed.
+import discord, sys, time, importlib, asyncio
 from os import listdir
 from os.path import isfile, join
-userClocks = {'guy': time.clock()}
-debugData = {}
+# Create empty dictionaries for future use.
+userClocks = {}
+dontLoad = [".gitignore", "__pycache__"] # Don't load any modules that are in here! You can put any module you don;t want to be automatically loaded in here.
 
-def listContains(listMain, test):
+def listContains(listMain, test): # Checks if a list object contains a certain object.
     for a in listMain:
         if a == test:
             return True
     return False
 
-def loadAll():
+def loadAll(): # Loads everything at the start.
     sys.path.append("modules")
     onlyfiles = listdir('modules')
-    moduleList = []
-    dontLoad = [".gitignore", "__pycache__"]
-    debugData['spamLogs'] = []
+    moduleList = [] # Create list to contain module names.
     for module in onlyfiles:
-        if not (listContains(dontLoad, module)):
-            modName = module.split(".")
+        if not (listContains(dontLoad, module)): # Check if it is meant to be loaded.
+            modName = module.split(".") # Get the first part of the module name, excluding the extension .py
             obj = __import__(modName[0])
-            globals()[modName[0]] = obj
+            globals()[modName[0]] = obj # Add module to the global variables.
             log("Loaded module: " + modName[0])
             moduleList.insert(0, modName[0])
 
     #Login with details from file
-    client= discord.Client()
+    client = discord.Client() # Ininitalise new Discord client.
     return client, moduleList
 
 # Runs command
-async def runCommand(commTbl, message, moduleList):
-    if (commTbl[0] == "debug"):
+async def runCommand(commTbl, message, moduleList): # Define main command-processing function.
+    if (commTbl[0] == "debug"): # Checks if command specified is special module 'debug'
         prog = sys.modules[commTbl[0]]
-        try:
+
+        try: # Attempt to run the debug command. If an error occurs, display that an error has occurred in the main console.
             await prog.main(message, commTbl, client, moduleList, sys, debugData)
         except Exception:
             log("Error occured in " + commTbl[0])
-    elif (commTbl[0] == "help"):
-        try:
+
+    elif (commTbl[0] == "help"): # Checks if command specified is special module 'help'
+        try: # Attempt to run help for a specified command. If help does not exist, or the command does not exist, or it errors, display that it has errored.
             prog = sys.modules[commTbl[1]]
             await client.send_message(message.channel, "Help for " + commTbl[1] + ":")
             await prog.help(message, commTbl, client)
         except Exception:
             log("Error occured in " + commTbl[0])
             await client.send_message(message.channel, "Help for the command specified could not be found. " + message.author.mention)
-    elif (commTbl[0] in sys.modules):
+
+    elif (commTbl[0] in sys.modules): # Checks if command specified exists in modules loaded.
         log("Found module with name " + commTbl[0])
         prog = sys.modules[commTbl[0]]
-        try:
+
+        try: # Attempt to run the command specified. If an error occurs, display that an error has occurred.
             await prog.main(message, commTbl, client)
         except Exception:
             log("Error occured in " + commTbl[0])
-    else:
+    else: # If the command couldn't be found, display error message.
         await client.send_message(message.channel, "The command specified could not be found. ")
     
-def log(text):
+def log(text): # Simple console-logging function.
     print("[LOG] " + text)
 
-client, moduleList = loadAll()
-
 @client.event
-async def on_message(message):
+async def on_message(message): # On message. This tries to figure out if it is a command, and if so, uses runCommand on it. Else, runs auto module on it.
     justMade = False
 
     if message.author.id != client.user.id:
-        if message.content.startswith("!"):
-            try:
+        if message.content.startswith("!"): # If it is a command
+            try: # Attempt to figure out whether they already have a previous user-clock.
                 clockCur = userClocks[message.author.id]
             except Exception:
-                userClocks[message.author.id] = time.clock()
+                userClocks[message.author.id] = time.clock() # If they don't, create one.
                 justMade = True
-            if userClocks[message.author.id] < time.clock() - 1 or justMade == True:
+            if userClocks[message.author.id] < time.clock() - 1 or justMade == True: # If they haven't issued a command within the last second, let them run one now.
                 justMade = False
-                userClocks[message.author.id] = time.clock()
-                comm = message.content[1:]
-                comms = comm.split(" ")
+                userClocks[message.author.id] = time.clock() # Set new clock.
+                comm = message.content[1:] # Get rid of !
+                comms = comm.split(" ") # Split the command into the parameters
                 log("Attempting to run command: " + comms[0])
                 await runCommand(comms, message, moduleList)
             else:
                 log("Stopped spam from " + message.author.name)
         else:
-            await auto.main(message, client)
+            await auto.main(message, client) # Run auto module on the text that has been sent.
 
 
 @client.event
-async def on_ready():
+async def on_ready(): # Print logged in, when logged in.
     log("Logged in!")
 
-details = open("login.txt", "r")
-logins = details.read().split(",")
+
+client, moduleList = loadAll() # Run loadAll
+details = open("login.txt", "r") # Open the defined login details at /login.txt
+logins = details.read().split(",") # Split them up into email and pass
 details.close()
-client.run(logins[0], logins[1])
+client.run(logins[0], logins[1]) # Run the client with the details
