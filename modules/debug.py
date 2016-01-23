@@ -1,6 +1,6 @@
 #Debugging module for the bot.
 
-async def main(message, args, client, modules, sys, debugData):
+async def main(message, args, client, modules, sys):
 	if len(args) > 1:
 		if args[1] == "get":
 			if args[2] == "modules":

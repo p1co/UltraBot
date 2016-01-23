@@ -34,9 +34,9 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
         prog = sys.modules[commTbl[0]]
 
         try: # Attempt to run the debug command. If an error occurs, display that an error has occurred in the main console.
-            await prog.main(message, commTbl, client, moduleList, sys, debugData)
-        except Exception:
-            log("Error occured in " + commTbl[0])
+            await prog.main(message, commTbl, client, moduleList, sys)
+        except Exception as error:
+            log("Debug error: " + str(error))
 
     elif (commTbl[0] == "help"): # Checks if command specified is special module 'help'
         try: # Attempt to run help for a specified command. If help does not exist, or the command does not exist, or it errors, display that it has errored.
@@ -60,6 +60,10 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
     
 def log(text): # Simple console-logging function.
     print("[LOG] " + text)
+
+
+client, moduleList = loadAll() # Run loadAll
+
 
 @client.event
 async def on_message(message): # On message. This tries to figure out if it is a command, and if so, uses runCommand on it. Else, runs auto module on it.
@@ -89,8 +93,6 @@ async def on_message(message): # On message. This tries to figure out if it is a
 async def on_ready(): # Print logged in, when logged in.
     log("Logged in!")
 
-
-client, moduleList = loadAll() # Run loadAll
 details = open("login.txt", "r") # Open the defined login details at /login.txt
 logins = details.read().split(",") # Split them up into email and pass
 details.close()
