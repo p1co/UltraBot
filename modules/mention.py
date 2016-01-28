@@ -8,9 +8,9 @@ async def main(message, args, client):
     users = []
     toMessage = "Mentioning all members in " + args[1] + ": "
     for member in members:
-        print("[LOG] Found member with name " + member.name)
         if listContains(member.roles, args[1].lower()):
             toMessage = toMessage + " " + member.mention
+            print("[LOG] Mentioinng member with name " + member.name)
     await client.send_message(message.channel, toMessage)
 
 async def help(message, args, client):
