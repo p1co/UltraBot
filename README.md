@@ -9,6 +9,7 @@ A bot that responds to custom commands, certain phrases and keywords and possibl
 
 # Installation
 
+- Make sure you are running python 3.5
 - Install the [Discord python API (async branch)](https://github.com/Rapptz/discord.py)
 - Enter your bot's Discord credentials into the login.txt in the form (username@example.com, pass)
 - Run main.py
