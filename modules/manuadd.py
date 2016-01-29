@@ -1,7 +1,4 @@
 # Ability to add/remove yourself from a server-side role.
-
-import log
-
 async def main(message, args, client):
     member = message.author
     if args[1] == "add":

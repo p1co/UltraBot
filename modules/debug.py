@@ -1,4 +1,3 @@
-import log
 #Debugging module for the bot.
 
 async def main(message, args, client, modules, sys):
@@ -39,6 +38,6 @@ async def main(message, args, client, modules, sys):
 						await sys.modules[modName].main(message, newArgs, client)
 					except Exception as ex:
 						await client.send_message(message.channel, "That command gave an error: " + str(ex))
-						log.error("Debug found an error in :" + modName + ". The error was: " + str(ex))
+						log("Debug found an error in: " + modName + ". The error was: " + str(ex), level=3)
 			else:
 				client.send_message(message.channel, "No command was specified to run! " + message.author.mention)

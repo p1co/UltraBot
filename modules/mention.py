@@ -1,5 +1,3 @@
-import log
-
 def listContains(listMain, test):
     for a in listMain:
         if a.name.lower() == test:
