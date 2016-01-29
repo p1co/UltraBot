@@ -54,7 +54,7 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
         try: # Attempt to run the command specified. If an error occurs, display that an error has occurred.
             await prog.main(message, commTbl, client)
         except Exception as ex:
-            log.log("Error occured in " + commTbl[0] + ": " + str(ex))
+            log.error("Error occured in " + commTbl[0] + ": " + str(ex))
             await client.send_message(message.channel, "An error occoured.")
     else: # If the command couldn't be found, display error message.
         await client.send_message(message.channel, "The command specified could not be found. ")
@@ -82,7 +82,7 @@ async def on_message(message): # On message. This tries to figure out if it is a
                 log.log(message.author.name + " attempted to run command: " + comms[0])
                 await runCommand(comms, message, moduleList)
             else:
-                log.log("Stopped spam from " + message.author.name)
+                log.warn("Stopped spam from " + message.author.name)
         else:
             await auto.main(message, client) # Run auto module on the text that has been sent.
 
