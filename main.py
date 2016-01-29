@@ -53,8 +53,9 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
 
         try: # Attempt to run the command specified. If an error occurs, display that an error has occurred.
             await prog.main(message, commTbl, client)
-        except Exception:
-            log("Error occured in " + commTbl[0])
+        except Exception as ex:
+            log("Error occured in " + commTbl[0] + ": " + str(ex))
+            await client.send_message(message.channel, "An error occoured.")
     else: # If the command couldn't be found, display error message.
         await client.send_message(message.channel, "The command specified could not be found. ")
     
