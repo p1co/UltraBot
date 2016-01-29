@@ -114,3 +114,6 @@ details = open("login.txt", "r") # Open the defined login details at /login.txt
 logins = details.read().split(",") # Split them up into email and pass
 details.close()
 client.run(logins[0], logins[1]) # Run the client with the details
+
+if not client.is_logged_in:
+    log("Error logging in", level=3)
