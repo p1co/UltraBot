@@ -6,6 +6,23 @@ from os.path import isfile, join
 userClocks = {}
 dontLoad = [".gitignore", "__pycache__"] # Don't load any modules that are in here! You can put any module you don;t want to be automatically loaded in here.
 
+def log(message, *optionalArgs):
+    if 'level' in optionalArgs:
+        if (type(optionalArgs['level']) is int):
+            logLevel = optionalArgs['level']
+        else:
+            logLevel = 1
+    else:
+        logLevel = 1
+    
+    if (logLevel >= loggingLevel):
+        if (logLevel == 1):
+            print("[LOG] " + message)
+        elif (logLevel == 2):
+            print("[WARNING] " + message)
+        elif (logLevel == 3):
+            print("[URGENT] " + message)
+
 def listContains(listMain, test): # Checks if a list object contains a certain object.
     for a in listMain:
         if a == test:
