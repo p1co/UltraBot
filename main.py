@@ -81,7 +81,7 @@ async def on_message(message): # On message. This tries to figure out if it is a
                 userClocks[message.author.id] = time.clock() # Set new clock.
                 comm = message.content[1:] # Get rid of !
                 comms = comm.split(" ") # Split the command into the parameters
-                log("Attempting to run command: " + comms[0])
+                log(message.author.name + " attempted to run command: " + comms[0])
                 await runCommand(comms, message, moduleList)
             else:
                 log("Stopped spam from " + message.author.name)
