@@ -32,6 +32,7 @@ def listContains(listMain, test): # Checks if a list object contains a certain o
     return False
 
 def loadAll(): # Loads everything at the start.
+    builtins.log = log
     sys.path.append("modules")
     onlyfiles = listdir('modules')
     moduleList = [] # Create list to contain module names.
@@ -40,11 +41,11 @@ def loadAll(): # Loads everything at the start.
             modName = module.split(".") # Get the first part of the module name, excluding the extension .py
             obj = __import__(modName[0])
             loaded[modName[0]] = obj # Add module to the global variables.
+            log("Loaded module with name '" + modName[0] + "'", level=1)
             moduleList.insert(0, modName[0])
 
     #Login with details from file
     client = discord.Client() # Ininitalise new Discord client.
-    builtins.log = log
     return client, moduleList
 
 # Runs command
