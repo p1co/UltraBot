@@ -1,5 +1,5 @@
 # Import things that are needed.
-import discord, sys, time, importlib, asyncio
+import discord, sys, time, importlib, asyncio, log
 from os import listdir
 from os.path import isfile, join
 # Create empty dictionaries for future use.
@@ -21,7 +21,7 @@ def loadAll(): # Loads everything at the start.
             modName = module.split(".") # Get the first part of the module name, excluding the extension .py
             obj = __import__(modName[0])
             globals()[modName[0]] = obj # Add module to the global variables.
-            log("Loaded module: " + modName[0])
+            log.log("Loaded module: " + modName[0])
             moduleList.insert(0, modName[0])
 
     #Login with details from file
@@ -36,7 +36,7 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
         try: # Attempt to run the debug command. If an error occurs, display that an error has occurred in the main console.
             await prog.main(message, commTbl, client, moduleList, sys)
         except Exception as error:
-            log("Debug error: " + str(error))
+            log.log("Debug error: " + str(error))
 
     elif (commTbl[0] == "help"): # Checks if command specified is special module 'help'
         try: # Attempt to run help for a specified command. If help does not exist, or the command does not exist, or it errors, display that it has errored.
@@ -44,24 +44,21 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
             await client.send_message(message.channel, "Help for " + commTbl[1] + ":")
             await prog.help(message, commTbl, client)
         except Exception:
-            log("Error occured in " + commTbl[0])
+            log.log("Error occured in " + commTbl[0])
             await client.send_message(message.channel, "Help for the command specified could not be found. " + message.author.mention)
 
     elif (commTbl[0] in sys.modules): # Checks if command specified exists in modules loaded.
-        log("Found module with name " + commTbl[0])
+        log.log("Found module with name " + commTbl[0])
         prog = sys.modules[commTbl[0]]
 
         try: # Attempt to run the command specified. If an error occurs, display that an error has occurred.
             await prog.main(message, commTbl, client)
         except Exception as ex:
-            log("Error occured in " + commTbl[0] + ": " + str(ex))
+            log.log("Error occured in " + commTbl[0] + ": " + str(ex))
             await client.send_message(message.channel, "An error occoured.")
     else: # If the command couldn't be found, display error message.
         await client.send_message(message.channel, "The command specified could not be found. ")
     
-def log(text): # Simple console-logging function.
-    print("[LOG] " + text)
-
 
 client, moduleList = loadAll() # Run loadAll
 
@@ -82,17 +79,17 @@ async def on_message(message): # On message. This tries to figure out if it is a
                 userClocks[message.author.id] = time.clock() # Set new clock.
                 comm = message.content[1:] # Get rid of !
                 comms = comm.split(" ") # Split the command into the parameters
-                log(message.author.name + " attempted to run command: " + comms[0])
+                log.log(message.author.name + " attempted to run command: " + comms[0])
                 await runCommand(comms, message, moduleList)
             else:
-                log("Stopped spam from " + message.author.name)
+                log.log("Stopped spam from " + message.author.name)
         else:
             await auto.main(message, client) # Run auto module on the text that has been sent.
 
 
 @client.event
 async def on_ready(): # Print logged in, when logged in.
-    log("Logged in!")
+    log.log("Logged in!")
 
 details = open("login.txt", "r") # Open the defined login details at /login.txt
 logins = details.read().split(",") # Split them up into email and pass
