@@ -19,11 +19,19 @@ A bot that responds to custom commands, certain phrases and keywords and possibl
 Cool! Here's an example module to get you started below:
 ```
 # Hello module
+import log
 async def main(message, args, client):
   await client.send_message(message.channel, "Hello, " + message.author.mention)
 async def help(message, args, client):
   await client.send_message(message.channel, "A command that says hello to people.")
 ```
+
+The import log allows you to log things to the console easily in the style:
+```
+[LOG] message
+```
+
+It will be useful in keeping the console look nice. You don't have to use it however!
 
 Please note that there are 'special' modules defined by default, which perform special actions and are not used in the standard module way. These are, as of current:
 - auto.py
