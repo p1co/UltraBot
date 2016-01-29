@@ -1,4 +1,4 @@
-import random
+import random, log
 
 responses = [
 	"It is certain",

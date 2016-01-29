@@ -1,4 +1,4 @@
-import random
+import random, log
 
 memes = [
 	"http://i2.kym-cdn.com/photos/images/facebook/000/875/509/533.jpg",

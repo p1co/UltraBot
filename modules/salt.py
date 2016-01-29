@@ -1,6 +1,6 @@
 #Salt-generating module for the bot.
 
-import random
+import random, log
 SaltLinks = [
     "http://vignette4.wikia.nocookie.net/gfaqssb/images/0/03/PJSalt.jpg/revision/latest?cb=20151213112803",
     "http://img1.ak.crunchyroll.com/i/spire4/1f6f0dc88ec848aa2ff3d0e8354ad8db1412410883_full.jpg",

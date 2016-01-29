@@ -1,3 +1,4 @@
+import log
 #Debugging module for the bot.
 
 async def main(message, args, client, modules, sys):
