@@ -36,7 +36,7 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
         try: # Attempt to run the debug command. If an error occurs, display that an error has occurred in the main console.
             await prog.main(message, commTbl, client, moduleList, sys)
         except Exception as error:
-            log.log("Debug error: " + str(error))
+            log.error("Debug error: " + str(error))
 
     elif (commTbl[0] == "help"): # Checks if command specified is special module 'help'
         try: # Attempt to run help for a specified command. If help does not exist, or the command does not exist, or it errors, display that it has errored.
@@ -44,7 +44,7 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
             await client.send_message(message.channel, "Help for " + commTbl[1] + ":")
             await prog.help(message, commTbl, client)
         except Exception:
-            log.log("Error occured in " + commTbl[0])
+            log.error("Error occured in " + commTbl[0])
             await client.send_message(message.channel, "Help for the command specified could not be found. " + message.author.mention)
 
     elif (commTbl[0] in sys.modules): # Checks if command specified exists in modules loaded.
