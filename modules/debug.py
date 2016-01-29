@@ -39,6 +39,6 @@ async def main(message, args, client, modules, sys):
 						await sys.modules[modName].main(message, newArgs, client)
 					except Exception as ex:
 						await client.send_message(message.channel, "That command gave an error: " + str(ex))
-						log.log(The command gave an error:" + str(ex))
+						log.log("The command gave an error:" + str(ex))
 			else:
 				client.send_message(message.channel, "No command was specified to run! " + message.author.mention)
