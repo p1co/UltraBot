@@ -65,7 +65,7 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
             await prog.help(message, commTbl, client)
         except Exception:
             log("Error occured in " + commTbl[0], level=3)
-            await client.send_message(message.channel, "Help for the command specified could not be found. " + message.author.mention)
+            await client.send_message(message.channel, "Help for the command specified could not be found, " + message.author.mention +".")
 
     elif (commTbl[0] in sys.modules): # Checks if command specified exists in modules loaded.
         log("Found module with name " + commTbl[0], level=1)
@@ -76,7 +76,7 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
         except Exception as ex:
             log("Error occured in " + commTbl[0] + ": " + str(ex), level=3)
     else: # If the command couldn't be found, display error message.
-        await client.send_message(message.channel, "The command specified could not be found. ")
+        await client.send_message(message.channel, "The command specified could not be found, " + message.author.mention +".")
     
 
 client, moduleList = loadAll() # Run loadAll
