@@ -22,6 +22,9 @@ async def main(message, args, client, modules, sys):
 							messTo = messTo + user.name + "; "
 				await client.send_message(message.channel, messTo)
 
+			elif args[2] == "version":
+				await client.send_message(message.channel, "Currently running a development version.")
+
 			else:
 				await client.send_message(message.channel, "Command not found within debug module.")
 

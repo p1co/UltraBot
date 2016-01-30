@@ -1,7 +1,8 @@
 # Import things that are needed.
-import discord, sys, time, importlib, asyncio, log, builtins
+import discord, sys, time, importlib, asyncio, builtins
 from os import listdir
 from os.path import isfile, join
+from xml.dom import minidom
 loggingLevel = 1
 # Create empty dictionaries for future use.
 userClocks = {}
