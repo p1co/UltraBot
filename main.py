@@ -1,10 +1,10 @@
 # Import things that are needed.
-import discord, sys, time, importlib, asyncio, builtins
+import asyncio, builtins, discord, importlib, sys, time, json
 from os import listdir
 from os.path import isfile, join
 from xml.dom import minidom
 loggingLevel = 1
-# Create empty dictionaries for future use.
+# Create empty dictionaries for future use
 userClocks = {}
 dontLoad = [".gitignore", "__pycache__"] # Don't load any modules that are in here! You can put any module you don;t want to be automatically loaded in here.
 loaded = {}
