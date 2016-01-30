@@ -18,13 +18,12 @@ async def main(message, args, client, modules, sys):
 				await client.send_message(message.channel, "- Manuadd <add> does not work.")
 
 			elif args[2] == "users":
-				messTo = "Users currently online: "
+				messTo = "Users in server: "
 				for server in client.servers:
 					for user in server.members:
 						#if user.status == 'online':
 							messTo = messTo + user.name + "; "
 				await client.send_message(message.channel, messTo)
-
 			elif args[2] == "version":
 				await client.send_message(message.channel, "Currently running a development version.")
 			elif args[2] == "uptime":
