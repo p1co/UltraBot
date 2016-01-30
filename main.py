@@ -47,7 +47,7 @@ def loadAll(): # Loads everything at the start.
     #Login with details from file
     client = discord.Client() # Ininitalise new Discord client.
     with open('config.json') as json_data_file:
-    data = json.load(json_data_file)
+        data = json.load(json_data_file)
     client.run(data["email"], data["password"]) # Run the client with the details
     return client, moduleList
 
