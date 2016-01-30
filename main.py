@@ -104,7 +104,7 @@ async def on_message(message): # On message. This tries to figure out if it is a
             else:
                 log("Stopped spam from " + message.author.name, level=2)
         else:
-            await loaded.auto.main(message, client) # Run auto module on the text that has been sent.
+            await loaded['auto'].main(message, client) # Run auto module on the text that has been sent.
 
 
 @client.event
