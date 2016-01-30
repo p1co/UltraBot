@@ -33,8 +33,6 @@ def listContains(listMain, test): # Checks if a list object contains a certain o
 
 def loadAll(): # Loads everything at the start.
     builtins.log = log
-    with open('config.json') as json_data_file:
-        data = json.load(json_data_file)
     sys.path.append("modules")
     onlyfiles = listdir('modules')
     moduleList = [] # Create list to contain module names.
@@ -112,8 +110,9 @@ async def on_message(message): # On message. This tries to figure out if it is a
 async def on_ready(): # Print logged in, when logged in.
     log("Successfully Logged in!", level=1)
 
-
-client.run(data["email"], data["password"]) # Run the client with the details
+with open('config.json') as json_data_file:
+    data = json.load(json_data_file)
+    client.run(data["email"], data["password"]) # Run the client with the details
     
 if not client.is_logged_in:
     log("Error logging in", level=3)
