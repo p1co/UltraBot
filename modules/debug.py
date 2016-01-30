@@ -1,4 +1,7 @@
 #Debugging module for the bot.
+import time
+
+starttime = time.time()
 
 async def main(message, args, client, modules, sys):
 	if len(args) > 1:
@@ -24,7 +27,9 @@ async def main(message, args, client, modules, sys):
 
 			elif args[2] == "version":
 				await client.send_message(message.channel, "Currently running a development version.")
-
+			elif args[2] == "uptime":
+				uptime = time.time() - starttime
+				await client.send_message(message.channel, "Current uptime is: " + str(round(uptime, 0)) + " seconds")
 			else:
 				await client.send_message(message.channel, "Command not found within debug module.")
 
