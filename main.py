@@ -2,7 +2,6 @@
 import asyncio, builtins, discord, importlib, sys, time, json
 from os import listdir
 from os.path import isfile, join
-from xml.dom import minidom
 loggingLevel = 1
 # Create empty dictionaries for future use
 userClocks = {}
