@@ -11,7 +11,7 @@ A bot that responds to custom commands, certain phrases and keywords and possibl
 
 - Make sure you are running python 3.5
 - Install the [Discord python API (async branch)](https://github.com/Rapptz/discord.py)
-- Enter your bot's Discord credentials into the login.txt in the form (username@example.com, pass)
+- Enter your bot's Discord credentials into the config.json in the appropriate places
 - Run main.py
 
 # I want to make a module!
@@ -31,5 +31,7 @@ The log command is a way to log stuff to the console. You can provide a log leve
 Please note that there are 'special' modules defined by default, which perform special actions and are not used in the standard module way. These are, as of current:
 - auto.py
 - debug.py
+
+Please note if submitting pull requests do not include config.json, as it will expose your login details.
 
 If you have any problems with the bot, make an issue or message us.
