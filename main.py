@@ -5,7 +5,7 @@ from os.path import isfile, join
 loggingLevel = 1
 # Create empty dictionaries for future use
 userClocks = {}
-dontLoad = [".gitignore", "__pycache__"] # Don't load any modules that are in here! You can put any module you don;t want to be automatically loaded in here.
+# dontLoad = [".gitignore", "__pycache__"] # Don't load any modules that are in here! You can put any module you don't want to be automatically loaded in here.
 loaded = {}
 
 def log(message, **optionalArgs):
@@ -36,8 +36,11 @@ def loadAll(): # Loads everything at the start.
     sys.path.append("modules")
     onlyfiles = listdir('modules')
     moduleList = [] # Create list to contain module names.
+    with open('config.json') as json_data_file:
+        dontload = json.load(json_data_file)
+        wontload = dontload["dontload"]
     for module in onlyfiles:
-        if not (listContains(dontLoad, module)): # Check if it is meant to be loaded.
+        if not (listContains(wontload, module)): # Check if it is meant to be loaded.
             modName = module.split(".") # Get the first part of the module name, excluding the extension .py
             obj = __import__(modName[0])
             loaded[modName[0]] = obj # Add module to the global variables.
@@ -87,8 +90,8 @@ client, moduleList = loadAll() # Run loadAll
 async def on_message(message): # On message. This tries to figure out if it is a command, and if so, uses runCommand on it. Else, runs auto module on it.
     justMade = False
     with open('config.json') as json_data_file:
-    	symbol = json.load(json_data_file)
-    	symbol = symbol["command_start"]
+        symbol = json.load(json_data_file)
+        symbol = symbol["command_start"]
     if message.author.id != client.user.id:
         if message.content.startswith(symbol): # If it is a command
             try: # Attempt to figure out whether they already have a previous user-clock.

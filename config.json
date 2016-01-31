@@ -1,6 +1,7 @@
 {
-	"email": "domain@tld.com",
+	"email": "email@domain.tld",
 	"password": "password",
 	"log_level": 2,
-	"command_start": "!"
+	"command_start": "!",
+	"dontload": [".gitignore", "__pycache__"]
 }
