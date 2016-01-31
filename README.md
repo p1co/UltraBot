@@ -11,7 +11,7 @@ A bot that responds to custom commands, certain phrases and keywords and possibl
 
 - Make sure you are running python 3.5
 - Install the [Discord python API (async branch)](https://github.com/Rapptz/discord.py)
-- Enter your bot's Discord credentials into the config.json in the appropriate places
+- Enter your bot's Discord credentials into the config.json in the appropriate places.  [Help!](https://github.com/elephantLocator/UltraBot/wiki/Config.json)
 - Run main.py
 
 # I want to make a module!
