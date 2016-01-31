@@ -36,9 +36,9 @@ def loadAll(): # Loads everything at the start.
     sys.path.append("modules")
     onlyfiles = listdir('modules')
     moduleList = [] # Create list to contain module names.
-    with open('config.json') as json_data_file:
-        dontload = json.load(json_data_file)
-        wontload = dontload["dontload"]
+    with open('config.json') as json_data_file: # Opens config.json
+        dontload = json.load(json_data_file) # Loads config
+        wontload = dontload["dontload"] # Takes anything inside dontload and won't load it. Shoudl be in form "lenny.py" for example
     for module in onlyfiles:
         if not (listContains(wontload, module)): # Check if it is meant to be loaded.
             modName = module.split(".") # Get the first part of the module name, excluding the extension .py
@@ -46,11 +46,8 @@ def loadAll(): # Loads everything at the start.
             loaded[modName[0]] = obj # Add module to the global variables.
             log("Loaded module with name: '" + modName[0] + "'", level=1)
             moduleList.insert(0, modName[0])
-        else:
-            log("Ignored module with name(s): " + str(wontload), level=2)
-
-    #Login with details from file
     client = discord.Client() # Ininitalise new Discord client.
+    log("Ignoring module(s) with name(s): " + str(wontload), level=2) # Says what hasn't been loaded as specified in config.json
     return client, moduleList
 
 # Runs command
