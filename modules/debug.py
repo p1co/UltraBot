@@ -18,7 +18,7 @@ async def main(message, args, client, modules, sys):
 				await client.send_message(message.channel, "- Manuadd <add> does not work.")
 
 			elif args[2] == "users":
-				messTo = "Users in server: "
+				messTo = "Users currently online: "
 				for server in client.servers:
 					for user in server.members:
 						#if user.status == 'online':
