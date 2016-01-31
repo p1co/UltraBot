@@ -41,7 +41,7 @@ def loadAll(): # Loads everything at the start.
             modName = module.split(".") # Get the first part of the module name, excluding the extension .py
             obj = __import__(modName[0])
             loaded[modName[0]] = obj # Add module to the global variables.
-            log("Loaded module with name '" + modName[0] + "'", level=1)
+            log("Loaded module with name: '" + modName[0] + "'", level=1)
             moduleList.insert(0, modName[0])
 
     #Login with details from file
@@ -86,9 +86,11 @@ client, moduleList = loadAll() # Run loadAll
 @client.event
 async def on_message(message): # On message. This tries to figure out if it is a command, and if so, uses runCommand on it. Else, runs auto module on it.
     justMade = False
-
+    with open('config.json') as json_data_file:
+    	symbol = json.load(json_data_file)
+    	symbol = symbol["command_start"]
     if message.author.id != client.user.id:
-        if message.content.startswith("!"): # If it is a command
+        if message.content.startswith(symbol): # If it is a command
             try: # Attempt to figure out whether they already have a previous user-clock.
                 clockCur = userClocks[message.author.id]
             except Exception:
