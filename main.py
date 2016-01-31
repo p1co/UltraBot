@@ -46,6 +46,8 @@ def loadAll(): # Loads everything at the start.
             loaded[modName[0]] = obj # Add module to the global variables.
             log("Loaded module with name: '" + modName[0] + "'", level=1)
             moduleList.insert(0, modName[0])
+        else:
+            log("Ignored module with name(s): " + str(wontload), level=2)
 
     #Login with details from file
     client = discord.Client() # Ininitalise new Discord client.
