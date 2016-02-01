@@ -18,6 +18,8 @@ def log(message, **optionalArgs):
         logLevel = 1
     
     if (logLevel >= data['log_level']):
+        if (logLevel== 0):
+            print("[DEBUG]" + message)
         if (logLevel == 1):
             print("[LOG] " + message)
         elif (logLevel == 2):
@@ -67,7 +69,7 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
             await client.send_message(message.channel, "Help for the command specified could not be found, " + message.author.mention +".")
 
     elif (commTbl[0] in sys.modules): # Checks if command specified exists in modules loaded.
-        log("Found module with name " + commTbl[0], level=1)
+        log("Found module with name " + commTbl[0], level=0)
         prog = loaded[commTbl[0]]
 
         try: # Attempt to run the command specified. If an error occurs, display that an error has occurred.
@@ -100,7 +102,7 @@ async def on_message(message): # On message. This tries to figure out if it is a
                 userClocks[message.author.id] = time.clock() # Set new clock.
                 comm = message.content[1:] # Get rid of !
                 comms = comm.split(" ") # Split the command into the parameters
-                log(message.author.name + " attempted to run command: " + comms[0], level=1)
+                log(message.author.name + " attempted to run command: " + comms[0], level=0)
                 await runCommand(comms, message, moduleList)
             else:
                 log("Stopped spam from " + message.author.name, level=2)
