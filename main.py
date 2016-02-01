@@ -5,7 +5,7 @@ from os.path import isfile, join
 loggingLevel = 1
 # Create empty dictionaries for future use
 userClocks = {}
-# dontLoad = [".gitignore", "__pycache__"] # Don't load any modules that are in here! You can put any module you don't want to be automatically loaded in here.
+# ignore_modules = [".gitignore", "__pycache__"] # Don't load any modules that are in here! You can put any module you don't want to be automatically loaded in here.
 loaded = {}
 with open('config.json') as json_data_file:
     data = json.load(json_data_file)
@@ -39,14 +39,14 @@ def loadAll(data): # Loads everything at the start.
     onlyfiles = listdir('modules')
     moduleList = [] # Create list to contain module names.
     for module in onlyfiles:
-        if not (listContains(data["dontload"], module)): # Check if it is meant to be loaded.
+        if not (listContains(data["ignore_modules"], module)): # Check if it is meant to be loaded.
             modName = module.split(".") # Get the first part of the module name, excluding the extension .py
             obj = __import__(modName[0])
             loaded[modName[0]] = obj # Add module to the global variables.
             log("Loaded module with name: '" + modName[0] + "'", level=1)
             moduleList.insert(0, modName[0])
     client = discord.Client() # Ininitalise new Discord client.
-    log("Ignoring module(s) with name(s): " + str(data["dontload"]), level=2) # Says what hasn't been loaded as specified in config.json
+    log("Ignoring module(s) with name(s): " + str(data["ignore_modules"]), level=2) # Says what hasn't been loaded as specified in config.json
     return client, moduleList
 
 # Runs command
@@ -107,7 +107,7 @@ async def on_message(message): # On message. This tries to figure out if it is a
             else:
                 log("Stopped spam from " + message.author.name, level=2)
         else:
-            if "auto.py" in data["dontload"]:
+            if "auto.py" in data["ignore_modules"]:
                 log("Auto was not loaded, not doing anything", level=2)
             else:
                 await loaded['auto'].main(message, client) # Run auto module on the text that has been sent.
