@@ -1,3 +1,5 @@
+# Be Aware - This is a dev version, and as such may be unstable and may break!
+
 # UltraBot
 
 A bot that responds to custom commands, certain phrases and keywords and possibly more in the future. Some useful functions include:
