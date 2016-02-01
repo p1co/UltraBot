@@ -5,7 +5,6 @@ from os.path import isfile, join
 loggingLevel = 1
 # Create empty dictionaries for future use
 userClocks = {}
-# ignore_modules = [".gitignore", "__pycache__"] # Don't load any modules that are in here! You can put any module you don't want to be automatically loaded in here.
 loaded = {}
 with open('config.json') as json_data_file:
     data = json.load(json_data_file)
