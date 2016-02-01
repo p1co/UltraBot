@@ -3,5 +3,5 @@
 	"password": "password",
 	"log_level": 2,
 	"command_start": "!",
-	"dontload": [".gitignore", "__pycache__","module.py"]
+	"ignore_modules": [".gitignore", "__pycache__","module.py"]
 }
