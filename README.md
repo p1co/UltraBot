@@ -1,6 +1,6 @@
-### Be Aware - This is a dev version, and as such may be unstable and may break! For a stable version, select the stable branch
-
 # UltraBot
+
+**Be aware that the bot is still in development and is somewhat unstable**
 
 A bot that responds to custom commands, certain phrases and keywords and possibly more in the future. Some useful functions include:
 
