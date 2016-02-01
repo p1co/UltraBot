@@ -2,7 +2,6 @@
 import asyncio, builtins, discord, importlib, sys, time, json
 from os import listdir
 from os.path import isfile, join
-loggingLevel = 1
 # Create empty dictionaries for future use
 userClocks = {}
 loaded = {}
@@ -18,7 +17,7 @@ def log(message, **optionalArgs):
     else:
         logLevel = 1
     
-    if (logLevel >= loggingLevel):
+    if (logLevel >= data['log_level']):
         if (logLevel == 1):
             print("[LOG] " + message)
         elif (logLevel == 2):
