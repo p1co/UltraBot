@@ -19,9 +19,9 @@ def log(message, **optionalArgs):
     
     if (logLevel >= data['log_level']):
         if (logLevel == 1):
-            print("[LOW] " + message)
+            print("[LOG] " + message)
         elif (logLevel == 2):
-            print("[MEDIUM] " + message)
+            print("[WARNING] " + message)
         elif (logLevel == 3):
             print("[URGENT] " + message)
 
