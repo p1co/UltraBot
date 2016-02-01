@@ -1,4 +1,4 @@
-# Be Aware - This is a dev version, and as such may be unstable and may break!
+### Be Aware - This is a dev version, and as such may be unstable and may break! For a stable version, select the stable branch
 
 # UltraBot
 
