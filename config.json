@@ -1,6 +1,6 @@
 {
-	"email": "james@hurcomb.net",
-	"password": "U2bz1gCg2EwiL5iW4Tk3",
+	"email": "mail@tld.com",
+	"password": "pass",
 	"log_level": 2,
 	"command_start": "!",
 	"ignore_modules": [".gitignore", "__pycache__","module.py"]
