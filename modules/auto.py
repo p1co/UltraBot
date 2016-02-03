@@ -5,7 +5,7 @@ async def main(t, client, autoMods):
 
     cont = t.content
     for modName in autoMods:
-        if modName in cont:
+        if modName.lower() in cont.lower():
 
             if (type(autoMods[modName]) is list):
                 for i2 in range(0, len(autoMods[modName])):
