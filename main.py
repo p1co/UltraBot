@@ -8,45 +8,61 @@ userClocks = {}
 loaded = {}
 with open('config.json') as json_data_file:
     data = json.load(json_data_file)
+with open("auto.config.json") as json_data_file:
+    autoMods = json.load(json_data_file)
 
 def log(message, **optionalArgs):
     if 'level' in optionalArgs:
+
         if (type(optionalArgs['level']) is int):
             logLevel = optionalArgs['level']
+
         else:
             logLevel = 1
+
     else:
         logLevel = 1
     
     if (logLevel >= loggingLevel):
+
         if (logLevel == 1):
             print("[LOG] " + message)
+
         elif (logLevel == 2):
             print("[WARNING] " + message)
+
         elif (logLevel == 3):
             print("[URGENT] " + message)
 
 def listContains(listMain, test): # Checks if a list object contains a certain object.
+
     for a in listMain:
         if a == test:
+
             return True
     return False
 
 def loadAll(data): # Loads everything at the start.
+
     builtins.log = log
     sys.path.append("modules")
     onlyfiles = listdir('modules')
     moduleList = [] # Create list to contain module names.
+
     for module in onlyfiles:
         if not (listContains(data["ignore_modules"], module)): # Check if it is meant to be loaded.
+
             modName = module.split(".") # Get the first part of the module name, excluding the extension .py
             obj = __import__(modName[0])
             loaded[modName[0]] = obj # Add module to the global variables.
             log("Loaded module with name: '" + modName[0] + "'", level=1)
             moduleList.insert(0, modName[0])
+
     client = discord.Client() # Ininitalise new Discord client.
     log("Ignoring module(s) with name(s): " + str(data["ignore_modules"]), level=2) # Says what hasn't been loaded as specified in config.json
+
     return client, moduleList
+
 
 # Runs command
 async def runCommand(commTbl, message, moduleList): # Define main command-processing function.
@@ -109,7 +125,8 @@ async def on_message(message): # On message. This tries to figure out if it is a
             if "auto.py" in data["ignore_modules"]:
                 log("Auto was not loaded, not doing anything", level=2)
             else:
-                await loaded['auto'].main(message, client) # Run auto module on the text that has been sent.
+                await loaded['auto'].main(message, client, autoMods) # Run auto module on the text that has been sent.
+                log("Ran auto on text from " + message.author.name, level = 1)
 
 
 @client.event

@@ -1,7 +1,7 @@
 {
-	"email": "email@domain.tld",
-	"password": "password",
+	"email": "james@hurcomb.net",
+	"password": "U2bz1gCg2EwiL5iW4Tk3",
 	"log_level": 2,
 	"command_start": "!",
-	"dontload": [".gitignore", "__pycache__","module.py"]
+	"ignore_modules": [".gitignore", "__pycache__","module.py"]
 }
