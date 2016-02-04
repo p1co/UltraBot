@@ -5,6 +5,6 @@
 	"command_start": "!",
 	"ignore_modules": [".gitignore", "__pycache__","module.py"],
 	"aliases": {
-		"eightball": "8ball",
+		"eightball": "8ball"
 	}
 }
