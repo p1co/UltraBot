@@ -3,6 +3,10 @@ import time, datetime
 
 starttime = time.time()
 
+async def help(message, args, client):
+	await client.send_message("!debug get <version|modules|users|uptime|issues> version lists current version, modules lists all currently loaded modules, users lists all currently online users, uptime gets current bot uptime, issues gets any currently known issues.")
+	await client.send_message("!debug run <command> <args> runs a specified command with any arguments, useful for finding errors.")
+
 async def main(message, args, client, modules, sys):
 	if len(args) > 1:
 		if args[1] == "get":
