@@ -141,7 +141,7 @@ async def on_message(message): # On message. This tries to figure out if it is a
 
 @client.event
 async def on_ready(): # Print logged in, when logged in.
-    log("Successfully Logged in!", level=1)
+    log("Successfully Logged in!", level=2)
 
 client.run(data["email"], data["password"]) # Run the client with the details
     
