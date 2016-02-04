@@ -5,7 +5,7 @@ from os.path import isfile, join
 # Create empty dictionaries for future use
 userClocks = {}
 loaded = {}
-version = "Development build, pre-release 0.3.1"
+version = "Stable Build, Version 1.0"
 
 with open('config.json') as json_data_file:
     data = json.load(json_data_file)
