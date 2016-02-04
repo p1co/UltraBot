@@ -25,7 +25,8 @@ async def main(message, args, client, modules, sys):
 				messTo = "Users currently online: "
 				for server in client.servers:
 					for user in server.members:
-						#if user.status == 'online':
+						print(user.name + str(user.status))
+						if str(user.status) == 'online':
 							messTo = messTo + user.name + "; "
 				await client.send_message(message.channel, messTo)
 			elif args[2] == "version":
