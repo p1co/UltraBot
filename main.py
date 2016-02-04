@@ -110,11 +110,11 @@ async def on_message(message): # On message. This tries to figure out if it is a
             try: # Attempt to figure out whether they already have a previous user-clock.
                 clockCur = userClocks[message.author.id]
             except Exception:
-                userClocks[message.author.id] = time.clock() # If they don't, create one.
+                userClocks[message.author.id] = time.time() # If they don't, create one.
                 justMade = True
-            if userClocks[message.author.id] < time.clock() - 1 or justMade == True: # If they haven't issued a command within the last second, let them run one now.
+            if userClocks[message.author.id] < time.time() - 1 or justMade == True: # If they haven't issued a command within the last second, let them run one now.
                 justMade = False
-                userClocks[message.author.id] = time.clock() # Set new clock.
+                userClocks[message.author.id] = time.time() # Set new clock.
                 comm = message.content[1:] # Get rid of !
                 comms = comm.split(" ") # Split the command into the parameters
                 log(message.author.name + " attempted to run command: " + comms[0], level=1)
