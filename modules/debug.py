@@ -30,7 +30,7 @@ async def main(message, args, client, modules, sys):
 							messTo = messTo + user.name + "; "
 				await client.send_message(message.channel, messTo)
 			elif args[2] == "version":
-				await client.send_message(message.channel, "Currently running a development version.")
+				await client.send_message(message.channel, sysVersion)
 			elif args[2] == "uptime":
 				uptime = time.time() - starttime
 				uptime = datetime.timedelta(seconds=int(uptime))

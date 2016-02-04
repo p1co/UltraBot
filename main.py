@@ -6,6 +6,8 @@ loggingLevel = 1
 # Create empty dictionaries for future use
 userClocks = {}
 loaded = {}
+version = "Development build, pre-release 0.3.1"
+
 with open('config.json') as json_data_file:
     data = json.load(json_data_file)
 with open("auto.config.json") as json_data_file:
@@ -45,6 +47,7 @@ def listContains(listMain, test): # Checks if a list object contains a certain o
 def loadAll(data): # Loads everything at the start.
 
     builtins.log = log
+    builtins.sysVersion = version
     sys.path.append("modules")
     onlyfiles = listdir('modules')
     moduleList = [] # Create list to contain module names.
