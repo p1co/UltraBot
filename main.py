@@ -1,11 +1,12 @@
 # Import things that are needed.
-import asyncio, builtins, discord, importlib, sys, time, json
+import asyncio, builtins, discord, importlib, sys, time, json, os
 from os import listdir
 from os.path import isfile, join
 # Create empty dictionaries for future use
 userClocks = {}
 loaded = {}
-version = "Stable Build, Version 1.0"
+version = "Development build, Version 1.0.1"
+data = {}
 
 with open('config.json') as json_data_file:
     data = json.load(json_data_file)
@@ -39,11 +40,10 @@ def listContains(listMain, test): # Checks if a list object contains a certain o
 
     for a in listMain:
         if a == test:
-
             return True
     return False
 
-def loadAll(data): # Loads everything at the start.
+def loadAll(): # Loads everything at the start.
 
     builtins.log = log
     builtins.sysVersion = version
@@ -72,15 +72,44 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
         prog = loaded[commTbl[0]]
 
         try: # Attempt to run the debug command. If an error occurs, display that an error has occurred in the main console.
-            await prog.main(message, commTbl, client, moduleList, sys)
+            stuffToDo = await prog.main(message, commTbl, client, moduleList, sys)
+            if (type(stuffToDo) is dict):
+                if stuffToDo['op'] == "unloadModule": #The debug module has requested that the main file unloads a module.
+                    moduleID = stuffToDo['moduleID']
+                    if loaded[moduleID] != None:
+                        loaded[moduleID] = None
+                        log("Unloaded module '" + moduleID + "' at request of user '" + message.author.name + "'", level = 3)
+                        await client.send_message(message.channel, "Unloaded module " + moduleID)
+                        for i in range(0, len(moduleList)):
+                            if moduleList[i] == moduleID:
+                                moduleList[i] = None
+                                break
+
+                elif stuffToDo['op'] == "loadModule": #The debug module has requested that the main file loads a module.
+                    loadType = stuffToDo['loadType']
+                    moduleID = stuffToDo['moduleID']
+                    if loadType == "local":
+                        #if os.path.isfile(moduleID + ".py"):
+                        obj = __import__(moduleID)
+                        loaded[moduleID] = obj
+                        moduleList.insert(0, moduleID)
+                        log("Loaded module '" + moduleID + "' at request of user '" + message.author.name + "'", level = 3)
+                        await client.send_message(message.channel, "Loaded module " + moduleID)
+                        #else:
+                            #print("not there")
+
+                else:
+                    log("tried to load module with return value of: " + stuffToDo['op'], level = 2)
+
         except Exception as error:
             log("Debug error: " + str(error), level=3)
 
     elif (commTbl[0] == "help"): # Checks if command specified is special module 'help'
         try: # Attempt to run help for a specified command. If help does not exist, or the command does not exist, or it errors, display that it has errored.
-            prog = loaded[commTbl[1]]
-            await client.send_message(message.channel, "Help for " + commTbl[1] + ":")
-            await prog.help(message, commTbl, client)
+            if loaded[commTbl[1]] != None:
+                prog = loaded[commTbl[1]]
+                await client.send_message(message.channel, "Help for " + commTbl[1] + ":")
+                await prog.help(message, commTbl, client)
         except Exception:
             log("Error occured in " + commTbl[0], level=3)
             await client.send_message(message.channel, "Help for the command specified could not be found, " + message.author.mention +".")
@@ -88,11 +117,11 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
     elif (commTbl[0] in sys.modules): # Checks if command specified exists in modules loaded.
         log("Found module with name " + commTbl[0], level=1)
         prog = loaded[commTbl[0]]
-
-        try: # Attempt to run the command specified. If an error occurs, display that an error has occurred.
-            await prog.main(message, commTbl, client)
-        except Exception as ex:
-            log("Error occured in " + commTbl[0] + ": " + str(ex), level=3)
+        if prog != None:
+            try: # Attempt to run the command specified. If an error occurs, display that an error has occurred.
+                await prog.main(message, commTbl, client)
+            except Exception as ex:
+                log("Error occured in " + commTbl[0] + ": " + str(ex), level=3)
     else: # If the command couldn't be found, display error message.
         if (commTbl[0] in data['aliases']):
             commToRun = data['aliases'][commTbl[0]]
@@ -106,17 +135,14 @@ async def runCommand(commTbl, message, moduleList): # Define main command-proces
             await client.send_message(message.channel, "The command specified could not be found, " + message.author.mention +".")
     
 
-client, moduleList = loadAll(data) # Run loadAll
+client, moduleList = loadAll() # Run loadAll
 
 
 @client.event
 async def on_message(message): # On message. This tries to figure out if it is a command, and if so, uses runCommand on it. Else, runs auto module on it.
     justMade = False
-    with open('config.json') as json_data_file:
-        symbol = json.load(json_data_file)
-        symbol = symbol["command_start"]
     if message.author.id != client.user.id:
-        if message.content.startswith(symbol): # If it is a command
+        if message.content.startswith(data['command_start']): # If it is a command
             try: # Attempt to figure out whether they already have a previous user-clock.
                 clockCur = userClocks[message.author.id]
             except Exception:

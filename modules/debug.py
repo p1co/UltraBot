@@ -1,5 +1,5 @@
 #Debugging module for the bot.
-import time, datetime
+import time, datetime, os
 
 starttime = time.time()
 
@@ -54,3 +54,16 @@ async def main(message, args, client, modules, sys):
 						log("Debug found an error in: " + modName + ". The error was: " + str(ex), level=3)
 			else:
 				await client.send_message(message.channel, "No command was specified to run! " + message.author.mention)
+
+		elif args[1] == "load": #Attempt to force the main file to load a module
+			if args[2] != None and args[3] != None:
+				modName = args[2] 
+				loadType = args[3]
+				retTbl = {"op" : "loadModule", "loadType" : "local", "moduleID" : modName}
+				return retTbl
+
+		elif args[1] == "unload": #Attempt to force the main file to unload a module
+			if args[2] != None:
+				modName = args[2]
+				retTbl = {"op": "unloadModule", "moduleID" : args[2]}
+				return retTbl
