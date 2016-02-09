@@ -1,0 +1,10 @@
+{
+	"email": "mail@tld.com",
+	"password": "pass",
+	"log_level": 2,
+	"command_start": "!",
+	"ignore_modules": [".gitignore", "__pycache__","module.py"],
+	"aliases": {
+		"8ball": "eightball"
+	}
+}

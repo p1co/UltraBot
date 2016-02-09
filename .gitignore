@@ -1,4 +1,4 @@
-login.txt
+config.json
 pinn.py
 
 # Byte-compiled / optimized / DLL files
@@ -63,3 +63,4 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+config.json
