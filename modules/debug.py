@@ -4,8 +4,11 @@ import time, datetime, os
 starttime = time.time()
 
 async def help(message, args, client):
-	await client.send_message("!debug get <version|modules|users|uptime|issues> version lists current version, modules lists all currently loaded modules, users lists all currently online users, uptime gets current bot uptime, issues gets any currently known issues.")
-	await client.send_message("!debug run <command> <args> runs a specified command with any arguments, useful for finding errors.")
+	await client.send_message(message.channel, "!debug get <version|modules|users|uptime|issues> version lists current version, modules lists all currently loaded modules, users lists all currently online users, uptime gets current bot uptime, issues gets any currently known issues.")
+	await client.send_message(message.channel, "!debug run <command> <args> runs a specified command with any arguments, useful for finding errors.")
+	await client.send_message(message.channel, "!debug load <module name|module address> <local|url> Loads a module from a url or from the local module folder")
+	await client.send_message(message.channel, "!debug unload <module name> Unloads a specified module from the currently active modules")
+	await client.send_message(message.channel, "!debug reload <module name> Reloads a specified module from the local modules directory")
 
 async def main(message, args, client, modules, sys):
 	if len(args) > 1:
