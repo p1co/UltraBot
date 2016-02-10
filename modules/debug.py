@@ -67,3 +67,9 @@ async def main(message, args, client, modules, sys):
 				modName = args[2]
 				retTbl = {"op": "unloadModule", "moduleID" : args[2]}
 				return retTbl
+
+		elif args[1] == "reload":
+			if args[2] != None:
+				modName = args[2]
+				retTbl = {"op": "reloadModule", "moduleID": args[2]}
+				return retTbl
