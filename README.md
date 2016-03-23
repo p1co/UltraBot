@@ -1,3 +1,5 @@
+Note currently hosted elsewhere, contact if wanting it?
+
 # UltraBot
 
 A bot that responds to custom commands, certain phrases and keywords and possibly more in the future. Some useful functions include:
