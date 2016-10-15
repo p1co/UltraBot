@@ -16,9 +16,7 @@ memes = [
 
 async def main(message, args, client):
         if (len(args) == 1):
-                maxNum = len(memes) - 1
-                rand = random.randint(0, maxNum)
-                await client.send_message(message.channel, memes[rand])
+                await client.send_message(message.channel, random.choice(memes))
         elif args[1] == "nope.avi":
                 await client.send_message(message.channel, "http://i.imgur.com/XFu47.gif")
         else:
